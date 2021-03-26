@@ -11,6 +11,9 @@ hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML,
        'Accept-Encoding': 'none',
        'Accept-Language': 'en-US,en;q=0.8',
        'Connection': 'keep-alive'}
+
+refreshrate = 60.0 # set this to how long you want the quote to stay (in seconds)
+
 def a():
     req1 = requests.get(imageurl, params=hdr)
     imgurl = req1.content
@@ -26,7 +29,7 @@ a()
 keys = pygame.key.get_pressed()
 timing = time.time()
 while running:
-    if time.time() - timing > 60.0:
+    if time.time() - timing > refreshrate:
         timing = time.time()
         a()
     for event in pygame.event.get():
